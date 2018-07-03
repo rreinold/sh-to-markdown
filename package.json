@@ -1,6 +1,6 @@
 {
   "name": "sh-to-markdown",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Bash script documentation generator using jsdoc and dmd",
   "main": "main.js",
   "scripts": {
