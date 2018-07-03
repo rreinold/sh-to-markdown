@@ -17,14 +17,17 @@ var data = fs.readFileSync(filepath,'utf8');
 replacements = [
 	[/: '/g,"/**"],
 	[/\n:/,"\n*/"],
-	[/(.*?) \(\)/g,'function $1()'],
-	['#!/bin/sh','']
 ]
 if (DEBUG) console.log({input:data});
 var output = data
-for(r of replacements){
-	output = output.replace(r[0],r[1])
+var matches = output.match(/: '\n(.*?):/gms)
+for(i in matches){
+	for(r of replacements){
+		matches[i] = matches[i].replace(r[0],r[1])
+	}
 }
+output = matches.join('\n')
+console.log(output)
 if(DEBUG) console.log({replaced:output});
 var logThis = jsdoc.explainSync({ source:output })
 if (DEBUG) console.log(logThis);
