@@ -1,3 +1,5 @@
+DEBUG = false
+
 const jsdoc = require('jsdoc-api')
 const jsdocParse = require('jsdoc-parse')
 const dmd = require('dmd')
@@ -12,22 +14,18 @@ var filepath = args[0]
 if( ! isBashScript(filepath)){
 	console.log("Warning: Only bash scripts are supported.")
 }
-DEBUG = true
 var data = fs.readFileSync(filepath,'utf8');
 replacements = [
 	[/: '/g,"/**"],
 	[/\n:/,"\n*/"],
 ]
-if (DEBUG) console.log({input:data});
-var output = data
-var matches = output.match(/: '\n(.*?):/gms)
+var matches = data.match(/: '\n(.*?):/gms);
 for(i in matches){
 	for(r of replacements){
 		matches[i] = matches[i].replace(r[0],r[1])
 	}
 }
 output = matches.join('\n')
-console.log(output)
 if(DEBUG) console.log({replaced:output});
 var logThis = jsdoc.explainSync({ source:output })
 if (DEBUG) console.log(logThis);
@@ -35,7 +33,7 @@ var options = {}
 var finalOutput = jsdocParse(logThis, options)
 if (DEBUG) console.log({finalOutput});
 var finalFoReal = dmd(finalOutput, {})
- console.log(finalFoReal);
+console.log(finalFoReal);
 
 /**
  * Determines whether a provided file has a '.sh' extension
