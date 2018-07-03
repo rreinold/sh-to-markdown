@@ -11,7 +11,8 @@ const BASH_TO_JS_MAPPING = [
 ]
 
 const DMD_OPTIONS = {
-	"example-lang":"bash"
+	"example-lang":"bash",
+	"plugin":"dmd-bitbucket"
 }
 
 var args = process.argv.slice(2);
@@ -26,6 +27,10 @@ if( ! isBashScript(filepath)){
 
 var fileContents = fs.readFileSync(filepath,'utf8');
 if(DEBUG) console.log({fileContents});
+
+
+
+
 var matches = fileContents.match(/: '\n(.*?)\n'/gsm);
 if (DEBUG) console.log({matches});
 for(i in matches){
