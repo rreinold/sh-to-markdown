@@ -21,7 +21,8 @@ if( ! isBashScript(filepath)){
 }
 
 var fileContents = fs.readFileSync(filepath,'utf8');
-var matches = fileContents.match(/: '\n(.*?):/gms);
+if(DEBUG) console.log({fileContents});
+var matches = fileContents.match(/: '\n(.*?)\n:/gsm);
 for(i in matches){
 	for(r of BASH_TO_JS_MAPPING){
 		matches[i] = matches[i].replace(r[0],r[1])
@@ -32,11 +33,11 @@ assembledSource = matches.join('\n')
 if(DEBUG) console.log({replaced:assembledSource});
 
 var jsdocd = jsdoc.explainSync({ source:assembledSource })
-if (DEBUG) console.log(logThis);
+if (DEBUG) console.log(jsdocd);
 
 var options = {}
 var jsdocParsed = jsdocParse(jsdocd, options)
-if (DEBUG) console.log({finalOutput});
+if (DEBUG) console.log({jsdocParsed});
 
 var markdown = dmd(jsdocParsed, {})
 console.log(markdown);
