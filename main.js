@@ -7,8 +7,12 @@ const fs = require('fs')
 
 const BASH_TO_JS_MAPPING = [
 	[/: '/g,"/**"],
-	[/\n:/,"\n*/"],
+	[/\n'/,"\n*/"],
 ]
+
+const DMD_OPTIONS = {
+	"example-lang":"bash"
+}
 
 var args = process.argv.slice(2);
 if(args.length > 1){
@@ -22,7 +26,8 @@ if( ! isBashScript(filepath)){
 
 var fileContents = fs.readFileSync(filepath,'utf8');
 if(DEBUG) console.log({fileContents});
-var matches = fileContents.match(/: '\n(.*?)\n:/gsm);
+var matches = fileContents.match(/: '\n(.*?)\n'/gsm);
+if (DEBUG) console.log({matches});
 for(i in matches){
 	for(r of BASH_TO_JS_MAPPING){
 		matches[i] = matches[i].replace(r[0],r[1])
@@ -39,7 +44,7 @@ var options = {}
 var jsdocParsed = jsdocParse(jsdocd, options)
 if (DEBUG) console.log({jsdocParsed});
 
-var markdown = dmd(jsdocParsed, {})
+var markdown = dmd(jsdocParsed, DMD_OPTIONS)
 console.log(markdown);
 
 /**
