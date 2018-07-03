@@ -1,11 +1,25 @@
 const jsdoc = require('jsdoc-api')
 const jsdocParse = require('jsdoc-parse')
 const dmd = require('dmd')
-// const DmdOptions = require('./dmd-options')
-DEBUG = false
-var fs = require('fs')
-var data = fs.readFileSync('/Users/RobReinold/Documents/Projects/bashdoc-to-markdown/input.sh','utf8');
-replacements = [[/: '/g,"/**"],[/\n:/,"\n*/"]]
+const fs = require('fs')
+
+var args = process.argv.slice(2);
+if(args.length > 1){
+	console.log("Warning: Only one file is supported. Ignoring " + args.length - 1 + " arguments.")
+}
+
+var filepath = args[0]
+if( ! isBashScript(filepath)){
+	console.log("Warning: Only bash scripts are supported.")
+}
+DEBUG = true
+var data = fs.readFileSync(filepath,'utf8');
+replacements = [
+	[/: '/g,"/**"],
+	[/\n:/,"\n*/"],
+	[/(.*?) \(\)/g,'function $1()'],
+	['#!/bin/sh','']
+]
 if (DEBUG) console.log({input:data});
 var output = data
 for(r of replacements){
@@ -17,7 +31,19 @@ if (DEBUG) console.log(logThis);
 var options = {}
 var finalOutput = jsdocParse(logThis, options)
 if (DEBUG) console.log({finalOutput});
-// const dmdOptions = new DmdOptions(options)
 var finalFoReal = dmd(finalOutput, {})
  console.log(finalFoReal);
 
+/**
+ * Determines whether a provided file has a '.sh' extension
+ * 
+ * @param {string} filepath, ex /home/user/script.sh
+ * @returns {boolean} isBashScript 
+ */
+function isBashScript(filepath){
+	var len = filepath.length
+	if(filepath.length > 3){
+		return filepath.substring(len - 3, len) === ".sh"
+	}
+	return false
+}
