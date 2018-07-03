@@ -2,7 +2,7 @@
 
 ## Overview
 
-Existing bash script documentation tools are lackluster, so I created a documentation generation tool that allows you to document bash sscripts with [JSDoc](usejsdoc.org), and generate beautiful markdown with it.
+Existing bash script documentation tools are lackluster, so I created a documentation generation tool that allows you to document bash scripts with [JSDoc](usejsdoc.org), and generate beautiful markdown with it.
 
 ## Formatting
 
@@ -15,7 +15,7 @@ Multi-line comments are detected as JSDoc comment blocks:
 :
 ```
 
-are interpreted in an identical fashion as JSDoc comments locks:
+are interpreted in an identical fashion as JSDoc comments blocks:
 
 ```javascript
 /**
