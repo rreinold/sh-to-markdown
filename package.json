@@ -1,0 +1,24 @@
+{
+  "name": "sh-to-markdown",
+  "version": "1.0.0",
+  "description": "Bash script documentation generator using jsdoc and dmd",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rreinold/sh-to-markdown.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rreinold/sh-to-markdown/issues"
+  },
+  "homepage": "https://github.com/rreinold/sh-to-markdown#readme",
+  "dependencies": {
+    "dmd": "^3.0.12",
+    "jsdoc-api": "^4.0.3",
+    "jsdoc-parse": "^3.0.1"
+  }
+}
