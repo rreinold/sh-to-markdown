@@ -1,4 +1,4 @@
-DEBUG = false
+DEBUG = true
 
 const jsdoc = require('jsdoc-api')
 const jsdocParse = require('jsdoc-parse')
@@ -31,7 +31,7 @@ if(DEBUG) console.log({fileContents});
 
 
 
-var matches = fileContents.match(/: '\n(.*?)\n'/gsm);
+var matches = fileContents.match(/: '\n(.*?)\n'/gms);
 if (DEBUG) console.log({matches});
 for(i in matches){
 	for(r of BASH_TO_JS_MAPPING){

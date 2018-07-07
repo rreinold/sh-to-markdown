@@ -12,6 +12,9 @@
   },
   "author": "",
   "license": "ISC",
+  "bin": {
+    "sh2md": "bin/cli.js"
+  },
   "bugs": {
     "url": "https://github.com/rreinold/sh-to-markdown/issues"
   },
@@ -22,5 +25,8 @@
     "jsdoc-api": "^4.0.3",
     "jsdoc-parse": "^3.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
+  }
 }
