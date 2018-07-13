@@ -1,4 +1,4 @@
-DEBUG = true
+DEBUG = false
 console.log("This version")
 const jsdoc = require('jsdoc-api')
 const jsdocParse = require('jsdoc-parse')
@@ -12,8 +12,7 @@ const BASH_TO_JS_MAPPING = [
 ]
 
 const DMD_OPTIONS = {
-	"example-lang":"bash",
-	"plugin":"dmd-bitbucket"
+	"example-lang":"bash"
 }
 
 var args = process.argv.slice(2);
@@ -49,8 +48,6 @@ if (DEBUG) console.log(jsdocd);
 var options = {}
 var jsdocParsed = jsdocParse(jsdocd, options)
 if (DEBUG) console.log({jsdocParsed});
-
-getTemplateData(options)
 
 var markdown = dmd(jsdocParsed, DMD_OPTIONS)
 console.log(markdown);
