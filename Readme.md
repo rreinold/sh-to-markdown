@@ -1,8 +1,9 @@
+![](https://img.shields.io/npm/v/sh-to-markdown)
 # sh-to-markdown
 
 ## Overview
 
-Existing bash script documentation tools are lackluster, so I created a documentation generation tool that allows you to document bash scripts with [JSDoc](usejsdoc.org), and generate beautiful markdown with it.
+Existing bash script documentation tools are lackluster, so I created a documentation generation tool that allows you to document bash scripts with typing, type links in markdown.
 
 ## Formatting
 
